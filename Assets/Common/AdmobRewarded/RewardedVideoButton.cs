@@ -1,6 +1,4 @@
-﻿using GoogleMobileAds.Api;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class RewardedVideoButton : MonoBehaviour
@@ -36,8 +34,6 @@ public class RewardedVideoButton : MonoBehaviour
 
     private bool IsAdAvailable()
     {
-        if (AdmobController.instance.rewardBasedVideo == null) return false;
-        bool isLoaded = AdmobController.instance.rewardBasedVideo.IsLoaded();
-        return isLoaded;
+        return false;
     }
 }

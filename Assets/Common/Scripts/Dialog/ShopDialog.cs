@@ -1,4 +1,4 @@
-﻿using UnityEngine.Purchasing;
+﻿
 using UnityEngine.UI;
 
 public class ShopDialog : Dialog
@@ -28,7 +28,7 @@ public class ShopDialog : Dialog
     private void OnItemPurchased(IAPItem item, int index)
     {
         // A consumable product has been purchased by this user.
-        if (item.productType == ProductType.Consumable)
+        /*if (item.productType == ProductType.Consumable)
         {
             CurrencyController.CreditBalance(item.value);
             Toast.instance.ShowMessage("Your purchase is successful");
@@ -43,7 +43,7 @@ public class ShopDialog : Dialog
         else if (item.productType == ProductType.Subscription)
         {
             // TODO: The subscription item has been successfully purchased, grant this to the player.
-        }
+        }*/
     }
 	
 	private void OnDestroy()

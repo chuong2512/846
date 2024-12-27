@@ -1,7 +1,4 @@
-﻿using GoogleMobileAds.Api;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RewardedVideoGroup : MonoBehaviour
 {
@@ -15,33 +12,9 @@ public class RewardedVideoGroup : MonoBehaviour
     {
         if (timerText != null) timerText.onCountDownComplete += OnCountDownComplete;
 
-#if UNITY_ANDROID || UNITY_IOS
-        Timer.Schedule(this, 0.1f, AddEvents);
-
-        if (!IsAvailableToShow())
-        {
-            buttonGroup.SetActive(false);
-            if (IsAdAvailable() && !IsActionAvailable())
-            {
-                int remainTime = (int)(ConfigController.Config.rewardedVideoPeriod - CUtils.GetActionDeltaTime(ACTION_NAME));
-                ShowTimerText(remainTime);
-            }
-        }
-
-        InvokeRepeating("IUpdate", 1, 1);
-#else
         buttonGroup.SetActive(false);
-#endif
     }
-
-    private void AddEvents()
-    {
-        if (AdmobController.instance.rewardBasedVideo != null)
-        {
-            AdmobController.instance.rewardBasedVideo.OnAdRewarded += HandleRewardBasedVideoRewarded;
-        }
-    }
-
+    
     private void IUpdate()
     {
         buttonGroup.SetActive(IsAvailableToShow());
@@ -63,11 +36,7 @@ public class RewardedVideoGroup : MonoBehaviour
         }
     }
 
-    public void HandleRewardBasedVideoRewarded(object sender, Reward args)
-    {
-        buttonGroup.SetActive(false);
-        ShowTimerText(ConfigController.Config.rewardedVideoPeriod);
-    }
+   
 
     private void OnCountDownComplete()
     {
@@ -88,11 +57,10 @@ public class RewardedVideoGroup : MonoBehaviour
         return CUtils.IsActionAvailable(ACTION_NAME, ConfigController.Config.rewardedVideoPeriod);
     }
 
+    
+    
     private bool IsAdAvailable()
-    {
-        if (AdmobController.instance.rewardBasedVideo == null) return false;
-        bool isLoaded = AdmobController.instance.rewardBasedVideo.IsLoaded();
-        return isLoaded;
+    { return false;
     }
 
     private void OnDestroy()

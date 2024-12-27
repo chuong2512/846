@@ -33,7 +33,11 @@ public class DragHandler : MonoBehaviour, IPointerExitHandler
     void Start()
     {
         timer = holdTime;
-        screenRect = RectTransformToScreenSpace(scrollRect.GetComponent<RectTransform>());
+        if (scrollRect != null)
+        {
+            
+            screenRect = RectTransformToScreenSpace(scrollRect.GetComponent<RectTransform>());
+        }
         tile = GetComponent<Tile>();
 
         emptyTile = MainController.emptyTile;
@@ -258,7 +262,8 @@ public class DragHandler : MonoBehaviour, IPointerExitHandler
 
     private bool IsInsideScrollRect()
     {
-        return screenRect.Contains(transform.position);
+        
+        return screenRect == null ? false : screenRect.Contains(transform.position);
     }
 
     public static Rect RectTransformToScreenSpace(RectTransform transform)
